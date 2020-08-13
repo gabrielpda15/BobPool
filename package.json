@@ -1,0 +1,22 @@
+{
+  "name": "bobpool",
+  "version": "1.0.0",
+  "description": "A discord bot dedicated to Random Feeders server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielpda15/BobPool.git"
+  },
+  "author": "gabrielpda15",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabrielpda15/BobPool/issues"
+  },
+  "homepage": "https://github.com/gabrielpda15/BobPool#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0"
+  }
+}
