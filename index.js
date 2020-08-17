@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const fs = require('fs-js');
 const Discord = require('discord.js');
 const config = require('./config.json');
@@ -60,4 +62,4 @@ client.on('message', async msg => {
 });
 
 log(`Connecting to discord...`, 'DISCORD', severity.INFO);
-client.login(config.token);
+client.login(process.env.token);
