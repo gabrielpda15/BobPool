@@ -4,19 +4,20 @@
   "description": "A discord bot dedicated to Random Feeders server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gabrielpda15/BobPool.git"
   },
   "author": "gabrielpda15",
-  "license": "MIT",
+  "license": "MIT License",
   "bugs": {
     "url": "https://github.com/gabrielpda15/BobPool/issues"
   },
   "homepage": "https://github.com/gabrielpda15/BobPool#readme",
   "dependencies": {
-    "discord.js": "^12.2.0"
+    "discord.js": "^12.3.1",
+    "fs-js": "^1.0.6"
   }
 }

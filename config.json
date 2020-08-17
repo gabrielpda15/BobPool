@@ -1,0 +1,15 @@
+{
+    "locale": "pt-BR",
+    "prefix": "b!",
+    "token": "NzQzMjE1NjE1NzE1ODM1OTc2.XzRbew.4gSU-0jkC8DYiqIYWTpPCn-IXTI",
+    "activities": [ 
+        "Não cometemos erros, apenas pequenos acidentes felizes.", 
+        "Não há nada de errado em ter uma árvore como amiga.", 
+        "Vamos enlouquecer juntos."
+    ],
+    "embedColor": "#BF0C00",
+    "log": {
+        "channel": "744668464496640100",
+        "format": "{date}     [{channel:3}] [{author}]  {text}"
+    }
+}
