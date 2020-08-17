@@ -38,8 +38,8 @@ module.exports.execute = async function(message, args) {
     let result = groupBy(message.client.commands, x => x.category, x => `\`${x.name}\``);
 
     for (let key in category) {   
-        const desc = result[category[key]]?.join(', ');
-        if (desc) embed.addField(category[key], desc);
+        const value = result[category[key]];
+        if (value) embed.addField(category[key], value.join(', '));
     }
 
     message.channel.send(embed);

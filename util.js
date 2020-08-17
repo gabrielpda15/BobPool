@@ -29,7 +29,7 @@ function getMention(id) {
 function logOnChannel(client, msg, text) {
     try {
         client.channels.fetch(config.log.channel).then(channel => {
-        if (channel?.type === 'text') {        
+        if (channel && channel.type === 'text') {        
             const logText = config.log.format
             .replace('{date}', new Date().toLocaleString(config.locale))
             .replace('{channel}', msg.channel.name)
