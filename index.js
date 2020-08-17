@@ -1,10 +1,17 @@
 const fs = require('fs-js');
 const Discord = require('discord.js');
 const config = require('./config.json');
-const { log, activityLoop, getMention, groupBy } = require('./util.js');
+const { logOnChannel, log, activityLoop, getMention, severity } = require('./util.js');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+client.findCommand = function(value) {
+  return this.commands.get(value) || this.commands.find(cmd => cmd.aliases && cmd.aliases.includes(value));
+};
+
+client.on('debug', (value) => {
+  log(value, 'DISCORD', severity.DEBUG);
+});
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.cmd.js'));
 
@@ -14,7 +21,7 @@ for (const file of commandFiles) {
 }
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  log(`Logged in as ${client.user.tag}!`, 'DISCORD', severity.INFO);
   activityLoop(client, 0);
 });
 
@@ -27,7 +34,7 @@ client.on('message', async msg => {
   const args = msg.content.slice(prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
   
-  const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+  const command = client.findCommand(commandName);
 
   if (!command) return;
 
@@ -43,14 +50,14 @@ client.on('message', async msg => {
 
   try {
     await command.execute(msg, args);
-    log(client, msg, `Comando ${commandName} utilizado.`);
+    logOnChannel(client, msg, `Comando ${commandName} utilizado.`);
   }
   catch (error) {
-    console.error(error);
-    log(client, msg, error);
+    log(error, 'JS', severity.ERROR);
+    logOnChannel(client, msg, error);
     msg.reply('Aconteceu um erro ao executar esse comando!');
   }
 });
 
-console.log(`Connecting to discord...`);
+log(`Connecting to discord...`, 'DISCORD', severity.INFO);
 client.login(config.token);

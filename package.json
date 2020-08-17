@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/gabrielpda15/BobPool#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "discord.js": "^12.3.1",
     "fs-js": "^1.0.6"
   }

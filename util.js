@@ -1,5 +1,20 @@
 const Discord = require('discord.js');
+const colors = require('colors');
 const config = require('./config.json');
+
+const severity = {
+    CRIT: 0,
+    ERROR: 1,
+    WARN: 2,
+    INFO: 3,
+    DEBUG: 4,
+    VERB: 5
+};
+
+const category = {
+    INFORMATION: 'Informativos',
+    ADMINISTRATIVE: 'Administrativos'
+}
 
 function activityLoop(client, n) {
     client.user.setActivity(config.activities[n]);
@@ -11,7 +26,7 @@ function getMention(id) {
     return `<@!${id}>`;
 }
 
-function log(client, msg, text) {
+function logOnChannel(client, msg, text) {
     try {
         client.channels.fetch(config.log.channel).then(channel => {
         if (channel?.type === 'text') {        
@@ -32,6 +47,36 @@ function log(client, msg, text) {
     } catch (error) {
         console.log(`Unable to log to discord chat ${config.log.channel}`);
     } 
+}
+
+function log(txt, src, sev) {
+    const sevKey = Object.keys(severity).find(x => severity[x] === sev);
+    const logText = config.log.consoleFormat
+        .replace('{date}', new Date().toLocaleString(config.locale))
+        .replace('{severity}', sevKey)
+        .replace('{source}', src)
+        .replace('{text}', txt);
+
+    switch (sev) {
+        case severity.CRIT:
+            console.log(logText .bgRed.yellow);
+            break;
+        case severity.ERROR:
+            console.log(logText .red);
+            break;
+        case severity.WARN:
+            console.log(logText .yellow);
+            break; 
+        case severity.INFO:
+            console.log(logText .green);
+            break;   
+        case severity.DEBUG:
+            console.log(logText .white);
+            break; 
+        case severity.VERB:
+            console.log(logText .gray);
+            break; 
+    }
 }
 
 function getRandom(min, max) {
@@ -58,22 +103,23 @@ module.exports.createEmbed = function(title, desc) {
 
 module.exports.groupBy = function(xs, keySelector, mapper) {
     return xs.reduce((rv, x) => {
-        const index = rv.findIndex(y => y.key === keySelector(x));
-        if (index == -1) {
-            rv.push({key: keySelector(x), values: [ mapper(x) ]});
-        } else {
-            rv[index].values.push(mapper(x));
-        }
+        (rv[keySelector(x)] = rv[keySelector(x)] || []).push(mapper(x));
         return rv;
-    }, []);
+    }, {});
 };
 
-module.exports.category = {
-    INFORMATION: 'Informativos',
-    ADMINISTRATIVE: 'Administrativos'
-}
-
+module.exports.category = category;
+module.exports.severity = severity;
 module.exports.log = log;
+module.exports.logOnChannel = logOnChannel;
 module.exports.getMention = getMention;
 module.exports.activityLoop = activityLoop;
 module.exports.getRandom = getRandom;
+
+Object.defineProperty(String.prototype, 'capitalizeFirstLetter', {
+    value: function capitalizeFirstLetter() {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    },
+    writable: true,
+    configurable: true
+});

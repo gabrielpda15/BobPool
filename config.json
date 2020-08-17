@@ -7,9 +7,10 @@
         "Não há nada de errado em ter uma árvore como amiga.", 
         "Vamos enlouquecer juntos."
     ],
-    "embedColor": "#BF0C00",
+    "embedColor": "#bf0c00",
     "log": {
         "channel": "744668464496640100",
-        "format": "{date}     [{channel:3}] [{author}]  {text}"
+        "format": "{date}     [{channel:3}] [{author}]  {text}",
+        "consoleFormat": "[{date}] [{severity}] [{source}]  {text}"
     }
 }
