@@ -4,7 +4,7 @@
   "description": "A discord bot dedicated to Random Feeders server",
   "main": "index.js",
   "scripts": {
-    "debug": "node .",
+    "start": "node .",
     "test": "exit 1"
   },
   "repository": {
