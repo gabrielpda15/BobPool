@@ -1,9 +1,8 @@
-require('dotenv').config();
-
 const fs = require('fs-js');
 const Discord = require('discord.js');
 const config = require('./config.json');
 const { logOnChannel, log, activityLoop, getMention, severity } = require('./util.js');
+try { require('dotenv').config(); } catch (error) { log('Missing dotenv dependencies, assuming it\'s a release.', 'NODEJS', severity.WARN)  }
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
