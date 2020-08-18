@@ -16,36 +16,36 @@ const category = {
     ADMINISTRATIVE: 'Administrativos'
 }
 
-function activityLoop(client, n) {
-    client.user.setActivity(config.activities[n]);
+async function activityLoop(client, n) {
+    await client.user.setActivity(config.activities[n]);
     if (n >= config.activities.length - 1) n = -1;
-    setTimeout(() => activityLoop(client, n + 1), 10000);
+    setTimeout(async () => await activityLoop(client, n + 1), 10000);
 }
 
 function getMention(id) {
     return `<@!${id}>`;
 }
 
-function logOnChannel(client, msg, text) {
+async function logOnChannel(client, msg, text) {
     try {
-        client.channels.fetch(config.log.channel).then(channel => {
-        if (channel && channel.type === 'text') {        
+        const channel = await client.channels.fetch(config.log.channel);
+    
+        if (channel && channel.type === 'text') {
             const logText = config.log.format
-            .replace('{date}', new Date().toLocaleString(config.locale))
-            .replace('{channel}', msg.channel.name)
-            .replace('{channelMention}', getMention(msg.channel.id))
-            .replace('{channel:1}', msg.channel.name.substr(1))
-            .replace('{channel:2}', msg.channel.name.substr(2))
-            .replace('{channel:3}', msg.channel.name.substr(3))
-            .replace('{author}', `${msg.author.username}#${msg.author.discriminator}`)
-            .replace('{authorMention}', getMention(msg.author.id))
-            .replace('{text}', text);
-                        
-            channel.send(logText);
+                .replace('{date}', new Date().toLocaleString(config.locale))
+                .replace('{channel}', msg.channel.name)
+                .replace('{channelMention}', getMention(msg.channel.id))
+                .replace('{channel:1}', msg.channel.name.substr(1))
+                .replace('{channel:2}', msg.channel.name.substr(2))
+                .replace('{channel:3}', msg.channel.name.substr(3))
+                .replace('{author}', `${msg.author.username}#${msg.author.discriminator}`)
+                .replace('{authorMention}', getMention(msg.author.id))
+                .replace('{text}', text);
+            
+            await channel.send(logText);
         }
-        });
     } catch (error) {
-        console.log(`Unable to log to discord chat ${config.log.channel}`);
+        log(`Não possivel enviar o log para o canal ${config.log.channel}`, 'DISCORD', severity.ERROR);
     } 
 }
 

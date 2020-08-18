@@ -1,7 +1,7 @@
 const fs = require('fs-js');
 const Discord = require('discord.js');
 const config = require('./config.json');
-const { logOnChannel, log, activityLoop, getMention, severity } = require('./util.js');
+const { logOnChannel, log, activityLoop, severity } = require('./util.js');
 try { require('dotenv').config(); } catch (error) { log('Missing dotenv dependencies, assuming it\'s a release.', 'NODEJS', severity.WARN)  }
 
 const client = new Discord.Client();
@@ -21,42 +21,65 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-client.on('ready', () => {
+client.on('ready', async () => {
   log(`Logged in as ${client.user.tag}!`, 'DISCORD', severity.INFO);
-  activityLoop(client, 0);
+  await activityLoop(client, 0);
 });
 
 client.on('message', async msg => {
-  const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
-  const prefix = msg.content.match(prefixMention) ? msg.content.match(prefixMention)[0] : config.prefix;
-
-  if (msg.author.bot || msg.channel.type === 'dm' || !msg.content.startsWith(prefix)) return;
-
-  const args = msg.content.slice(prefix.length).trim().split(/ +/);
-  const commandName = args.shift().toLowerCase();
-  
-  const command = client.findCommand(commandName);
-
-  if (!command) return;
-
-  if (command.args && !args.length) {
-		let reply = `Você não providenciou nenhum argumento, ${message.author}!`;
-
-		if (command.usage) {
-			reply += `\nO modo correto de usar esse comando seria: \`${prefix}${command.name} ${command.usage}\``;
-		}
-
-		return message.channel.send(reply);
-	}
-
   try {
+    const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
+    const prefix = msg.content.match(prefixMention) ? msg.content.match(prefixMention)[0] : config.prefix;
+
+    if (msg.author.bot || msg.channel.type === 'dm' || !msg.content.startsWith(prefix)) return;
+
+    const isWhiteListed = config.adminConfig.whiteList.findIndex(x => x === msg.channel.id) != -1;
+    const isOwner = msg.author.id == msg.guild.ownerID;
+    const isAdmin = msg.member.permissions.has('MANAGE_GUILD');
+
+    if (!isOwner && (!isAdmin || !isWhiteListed)) {
+      if (isAdmin) {
+        await msg.delete();
+        const dm = await msg.author.createDM();
+        await dm.send('Esse canal não está na white-list do servidor!\nFale com o administrador do bot caso isso seja um erro!');
+      }
+      return;
+    }
+
+    const args = msg.content.slice(prefix.length).trim().split(/ +/);
+    const commandName = args.shift().toLowerCase();
+
+    const command = client.findCommand(commandName);
+    if (!command) return;
+
+    if (command.onlyOwner && !isOwner) {
+      await msg.reply('esse comando é restrito ao dono do server!');
+      return;
+    }
+
+    if (command.requireArgs && !args.length) {
+      let reply = '';
+
+      if (command.args > args.length) 
+        reply = `${msg.author}, você providenciou apenas ${args.length}/${command.args} dos argumentos necessários`;
+      else
+        reply = `${msg.author}, esse comando requer argumentos!`;
+
+      if (command.usage) {
+        reply += `\nO modo correto de usar esse comando seria: \`${prefix}${command.name} ${command.usage}\``;
+      }
+
+      await msg.channel.send(reply);
+      return;
+    }
+    
     await command.execute(msg, args);
-    logOnChannel(client, msg, `Comando ${commandName} utilizado.`);
+    await logOnChannel(client, msg, `Comando ${commandName} utilizado.`);
   }
   catch (error) {
     log(error, 'JS', severity.ERROR);
     logOnChannel(client, msg, error);
-    msg.reply('Aconteceu um erro ao executar esse comando!');
+    await msg.channel.send('Aconteceu um erro ao executar esse comando!');
   }
 });
 

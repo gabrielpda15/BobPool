@@ -25,9 +25,9 @@ module.exports.execute = async function(message, args) {
                 embed = embed.addField(title, 
                     command.usage.map(x => x != '' ? `\`${prefix}${command.name} ${x}\`` : `\`${prefix}${command.name}\``).join('\n'));
             }
-            message.reply(embed);
+            message.channel.send(embed);
         } else {
-            message.reply(`Desculpe não conheço o comando \`${args[0]}\`!`);
+            message.channel.send(`Desculpe não conheço o comando \`${args[0]}\`!`);
         }
         return;
     }

@@ -7,6 +7,19 @@
         "Vamos enlouquecer juntos."
     ],
     "embedColor": "#bf0c00",
+    "adminConfig": {
+        "configuration": {
+            "channel": "742651342169964604",
+            "message": null
+        },
+        "blockedRole": "713783108213800990",
+        "whiteList": [
+            "742739836217196585", "713515973373853778", 
+            "713520800963231817", "742748828993716316", 
+            "449627722344431627", "449628053845442570",
+            "745058376446378094"
+        ]
+    },
     "log": {
         "channel": "744668464496640100",
         "format": "{date}     [{channel:3}] [{author}]  {text}",
