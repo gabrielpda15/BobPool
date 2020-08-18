@@ -6,10 +6,7 @@
     ],
     "embedColor": "#bf0c00",
     "adminConfig": {
-        "configuration": {
-            "channel": "742651342169964604",
-            "message": null
-        },
+        "configMessageId": "745401662872617010",
         "blockedRole": "713783108213800990",
         "whiteList": [
             "742739836217196585", "713515973373853778", 

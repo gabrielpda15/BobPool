@@ -1,0 +1,48 @@
+{
+    "type": "embed",
+    "title": "Configurações",
+    "description": [
+        "Reaja nessa mensagem no emoji referente ao cargo que você deseja adquirir. ",
+        "Caso esteja com algum cargo que não deseja mais, ou deseja um cargo não listado ",
+        "consulte a <@&324618372333436929> para remoção/adição do mesmo.\n\n",
+        ":video_game: Você curte uns joguinhos?!\n",
+        ":ramen: Você é um otaku fididu?!\n",
+        "<:tomoko:743236157608820736> Quer colecionar waifus e husbandos?!\n",
+        ":game_die: Você tem dado em casa? Gosta de um RPG diferenciado?\n\n",
+        ":arrow_right: Ou por acaso você joga alguns dos jogos abaixo?\n",
+        "<:league_of_legends:743167521896792124> Liga das Lendas\n",
+        "<:valorant:743167364518117517> Valorant\n",
+        "<:minecraft:743166770667585597> Minecraft\n"
+    ],
+    "thumbnailUrl": "https://i.imgur.com/OvqCRMZ.png",
+    "reactions": {
+        "&videogames": {
+            "type": "role",
+            "value": "341853764619206657"
+        },
+        "&ramen": {
+            "type": "role",
+            "value": "338105097332588544"
+        },
+        "743236157608820736": {
+            "type": "dm",
+            "value": "Caso se sinta interessado contate um dos STAFF sobre isso!"
+        },
+        "&gamedie": {
+            "type": "role",
+            "value": "717238786945187901"
+        },
+        "743167521896792124": {
+            "type": "role",
+            "value": "742743165303521380"
+        },
+        "743167364518117517": {
+            "type": "role",
+            "value": "742743240729428068"
+        },
+        "743166770667585597": {
+            "type": "role",
+            "value": "742743055806758972"
+        }
+    }
+}

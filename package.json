@@ -4,22 +4,30 @@
   "description": "A discord bot dedicated to Random Feeders server",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "test": "exit 1"
+    "start": "ts-node-dev --respawn src/index.ts",
+    "build": "ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gabrielpda15/BobPool.git"
   },
   "author": "gabrielpda15",
-  "license": "MIT License",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/gabrielpda15/BobPool/issues"
   },
   "homepage": "https://github.com/gabrielpda15/BobPool#readme",
   "dependencies": {
-    "colors": "^1.4.0",
+    "@types/node": "^14.6.0",
+    "colors.ts": "^1.0.20",
     "discord.js": "^12.3.1",
-    "fs-js": "^1.0.6"
+    "fs-js": "^1.0.6",
+    "rxjs": "^6.6.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "ts-node-dev": "^1.0.0-pre.57"
   }
 }

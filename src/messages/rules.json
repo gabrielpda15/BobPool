@@ -1,0 +1,30 @@
+{
+    "type": "embed",
+    "title": "Regras do Servidor",
+    "description": [
+        "Todas as regras devem ser seguidas, caso contrário você estará sujeito ",
+        "a uma restrição do servidor ou até mesmo banimento permanente."
+    ],
+    "thumbnailUrl": "https://i.imgur.com/oV07tAz.png",
+    "fields": [
+        { 
+            "title": "Regras de Convivência", 
+            "description": [
+                ":white_small_square: Não seja um chato.\n",
+                ":white_small_square: Não desrespeite outros membros.\n",
+                ":white_small_square: Não spamme mensagens.\n",
+                ":white_small_square: Não toleramos qualquer tipo de preconceito.\n",
+                ":white_small_square: Não traga tretas de outros grupos, não temos nada a ver com seus problemas."
+            ]
+        },
+        { 
+            "title": "Regras Gerais", 
+            "description": [
+                ":white_small_square: Proibido qualquer tipo de divulgação / links ( discords, youtube, twitch, etc ) no servidor ou privado de membros.\n",
+                ":white_small_square: Use os chats para o que foram feitos (Ex.: Não mandar jogo em chat de anime).\n",
+                ":white_small_square: Não enviar mensagens diretas a membros da Staff a menos que seja solicitado.\n",
+                ":white_small_square: Divirta-se!!!" 
+            ]
+        }
+    ]
+}
