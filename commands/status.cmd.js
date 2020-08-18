@@ -1,4 +1,3 @@
-const { prefix } = require('../config.json');
 const { category } = require('../util.js');
 
 module.exports = {
@@ -22,7 +21,7 @@ module.exports.execute = async function(message, args) {
             await message.channel.send('Pronto! Agora estou online!');
             break;
         default:
-            await message.channel.send(`Opção inválida! Tente usar \`${prefix}${this.name}\``);
+            await message.channel.send(`Opção inválida! Tente usar \`${process.env.prefix}${this.name}\``);
             break;
     }   
 }

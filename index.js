@@ -29,7 +29,7 @@ client.on('ready', async () => {
 client.on('message', async msg => {
   try {
     const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
-    const prefix = msg.content.match(prefixMention) ? msg.content.match(prefixMention)[0] : config.prefix;
+    const prefix = msg.content.match(prefixMention) ? msg.content.match(prefixMention)[0] : process.env.prefix;
 
     if (msg.author.bot || msg.channel.type === 'dm' || !msg.content.startsWith(prefix)) return;
 

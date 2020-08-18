@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const { prefix } = require('../config.json');
 const { groupBy, category, createEmbed, logOnChannel: log } = require('../util.js');
 const utils = require('../util.js');
 
@@ -23,7 +22,7 @@ module.exports.execute = async function(message, args) {
                 let title = 'Uso';
                 if (command.usage.length > 1) title = 'Usos';
                 embed = embed.addField(title, 
-                    command.usage.map(x => x != '' ? `\`${prefix}${command.name} ${x}\`` : `\`${prefix}${command.name}\``).join('\n'));
+                    command.usage.map(x => x != '' ? `\`${process.env.prefix}${command.name} ${x}\`` : `\`${process.env.prefix}${command.name}\``).join('\n'));
             }
             await message.channel.send(embed);
         } else {
@@ -33,7 +32,7 @@ module.exports.execute = async function(message, args) {
     }
 
     embed = createEmbed('Todos os Comandos', 
-        `Utilize \`${prefix}help <nome do comando>\` para obter ajuda mais detalhada!`);
+        `Utilize \`${process.env.prefix}help <nome do comando>\` para obter ajuda mais detalhada!`);
 
     let result = groupBy(message.client.commands, x => x.category, x => `\`${x.name}\``);
 

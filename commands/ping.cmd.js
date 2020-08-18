@@ -1,4 +1,3 @@
-const { prefix } = require('../config.json');
 const { category } = require('../util.js');
 
 module.exports = {

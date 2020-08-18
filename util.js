@@ -32,7 +32,7 @@ async function logOnChannel(client, msg, text) {
     
         if (channel && channel.type === 'text') {
             const logText = config.log.format
-                .replace('{date}', new Date().toLocaleString(config.locale))
+                .replace('{date}', new Date().toLocaleString(process.env.locale))
                 .replace('{channel}', msg.channel.name)
                 .replace('{channelMention}', getMention(msg.channel.id))
                 .replace('{channel:1}', msg.channel.name.substr(1))
@@ -52,7 +52,7 @@ async function logOnChannel(client, msg, text) {
 function log(txt, src, sev) {
     const sevKey = Object.keys(severity).find(x => severity[x] === sev);
     const logText = config.log.consoleFormat
-        .replace('{date}', new Date().toLocaleString(config.locale))
+        .replace('{date}', new Date().toLocaleString(process.env.locale))
         .replace('{severity}', sevKey)
         .replace('{source}', src)
         .replace('{text}', txt);
