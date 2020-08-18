@@ -25,9 +25,9 @@ module.exports.execute = async function(message, args) {
                 embed = embed.addField(title, 
                     command.usage.map(x => x != '' ? `\`${prefix}${command.name} ${x}\`` : `\`${prefix}${command.name}\``).join('\n'));
             }
-            message.channel.send(embed);
+            await message.channel.send(embed);
         } else {
-            message.channel.send(`Desculpe não conheço o comando \`${args[0]}\`!`);
+            await message.channel.send(`Desculpe não conheço o comando \`${args[0]}\`!`);
         }
         return;
     }
@@ -42,5 +42,5 @@ module.exports.execute = async function(message, args) {
         if (value) embed.addField(category[key], value.join(', '));
     }
 
-    message.channel.send(embed);
+    await message.channel.send(embed);
 }

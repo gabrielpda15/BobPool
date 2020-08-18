@@ -14,15 +14,15 @@ module.exports = {
 module.exports.execute = async function(message, args) {
     switch (args[0]) {
         case 'inv':
-            message.client.user.setStatus('invisible');
-            message.channel.send('Pronto! Agora estou invisivel!');
+            await message.client.user.setStatus('invisible');
+            await message.channel.send('Pronto! Agora estou invisivel!');
             break;
         case 'online':
-            message.client.user.setStatus('online');
-            message.channel.send('Pronto! Agora estou online!');
+            await message.client.user.setStatus('online');
+            await message.channel.send('Pronto! Agora estou online!');
             break;
         default:
-            message.channel.send(`Opção inválida! Tente usar \`${prefix}${this.name}\``);
+            await message.channel.send(`Opção inválida! Tente usar \`${prefix}${this.name}\``);
             break;
     }   
 }

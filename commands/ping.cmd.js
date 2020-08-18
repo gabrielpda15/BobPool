@@ -11,5 +11,5 @@ module.exports = {
 module.exports.execute = async function(message, args) {
 	let botMsg = await message.channel.send("〽️ Pinging...");
 	var ping = botMsg.createdTimestamp - message.createdTimestamp + ' ms';
-	botMsg.edit(`:ping_pong: Pong! \`${ping}\``);
+	await botMsg.edit(`:ping_pong: Pong! \`${ping}\``);
 }
