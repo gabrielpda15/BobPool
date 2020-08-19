@@ -17,7 +17,7 @@ client.on('debug', (value) => {
   log(value, 'DISCORD', severity.DEBUG);
 });
 
-const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.cmd.ts'));
+const commandFiles = fs.readdirSync('./src/commands');
 
 client.importCommands(commandFiles);
 

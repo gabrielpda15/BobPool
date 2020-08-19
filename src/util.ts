@@ -1,9 +1,6 @@
 import * as Discord from 'discord.js';
 import config from '../config.json';
-import Colors = require('colors.ts');
 import { StringDecoder } from 'string_decoder';
-
-Colors.enable();
 
 export enum severity {
     CRIT = 'CRIT',
@@ -63,27 +60,8 @@ export function log(txt: string, src: string, sev: severity) {
         .replace('{severity}', sev)
         .replace('{source}', src)
         .replace('{text}', txt);
-
-    switch (sev) {
-        case severity.CRIT:
-            console.log(logText.bg_red.yellow);
-            break;
-        case severity.ERROR:
-            console.log(logText.red);
-            break;
-        case severity.WARN:
-            console.log(logText.yellow);
-            break; 
-        case severity.INFO:
-            console.log(logText.green);
-            break;   
-        case severity.DEBUG:
-            console.log(logText.white);
-            break; 
-        case severity.VERB:
-            console.log(logText.gray);
-            break; 
-    }
+        
+    console.log(logText);
 }
 
 export function getRandom(min: number, max: number) {

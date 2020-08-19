@@ -20,7 +20,7 @@ class Reload implements ICommand {
 	public async execute(message: Discord.Message, args: string[]) {
         try {
             await message.delete();
-            const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.cmd.ts'));
+            const commandFiles = fs.readdirSync('./src/commands');
             (message.client as Bot).importCommands(commandFiles);
             await message.channel.send('Comandos recarregados com sucesso!');
         }

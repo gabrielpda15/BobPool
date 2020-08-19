@@ -1,19 +1,16 @@
 import * as Discord from 'discord.js';
-import { Observable } from 'rxjs';
 import { ICommand } from './command';
-import { EventEmitter } from 'events';
+import { log, severity } from './util';
 
 export class Bot extends Discord.Client {
 
     public commands: Discord.Collection<string, ICommand>;
-    // public reactionHandler: ReactionEventEmitter;
     private importedFiles: string[];
 
     constructor(options?: Discord.ClientOptions) {
         super(options);
 
         this.importedFiles = [];
-        // this.reactionHandler = new ReactionEventEmitter();
         this.commands = new Discord.Collection<string, ICommand>();
     }
 
@@ -29,19 +26,9 @@ export class Bot extends Discord.Client {
                         const cmd: ICommand = new c.default;
                         this.commands.set(cmd.name, cmd);
                     }
-                });
+                }).catch(error => log(error, 'CMD_IMPORT', severity.ERROR));
             }            
-        }        
+        }
+        log(`Loaded ${this.commands.array().length} commands!`, 'CMD_IMPORT', severity.INFO);    
     }
 }
-
-/*
-export declare interface ReactionEventEmitter {
-    on(event: 'addReaction', listener: (reaction: Discord.ReactionEmoji, user: Discord.User | Discord.PartialUser) => Promise<any>): this;
-    on(event: string, listener: Function): this;
-}
-
-export class ReactionEventEmitter extends EventEmitter {
-    
-}
-*/
