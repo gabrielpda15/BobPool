@@ -3,7 +3,8 @@
     "title": "Regras do Servidor",
     "description": [
         "Todas as regras devem ser seguidas, caso contrário você estará sujeito ",
-        "a uma restrição do servidor ou até mesmo banimento permanente."
+        "a uma restrição do servidor ou até mesmo banimento permanente.\n\n",
+        "Aceite as regras reagindo ao emote no final!"
     ],
     "thumbnailUrl": "https://i.imgur.com/oV07tAz.png",
     "fields": [
@@ -26,5 +27,11 @@
                 ":white_small_square: Divirta-se!!!" 
             ]
         }
-    ]
+    ],
+    "reactions": {
+        "745704339573571735": {
+            "type": "role",
+            "value": "742727510130819134"
+        }
+    }
 }
