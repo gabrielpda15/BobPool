@@ -29,6 +29,6 @@ export class Bot extends Discord.Client {
                 }).catch(error => log(error, 'CMD_IMPORT', severity.ERROR));
             }            
         }
-        log(`Loaded ${this.commands.array().length} commands!`, 'CMD_IMPORT', severity.INFO);    
+        log(`Loaded ${this.commands.size} commands!`, 'CMD_IMPORT', severity.INFO);    
     }
 }
