@@ -1,1 +1,1 @@
-worker: npm build
+worker: node dist/src/index.js
