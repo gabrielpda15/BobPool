@@ -6,10 +6,13 @@ import { ICommand } from './command';
 import config from '../config.json';
 import { reactions } from './messages/config.json'
 import emojis from './emojis.json';
-import { config as dotenvConfig } from 'dotenv';
 
-if (!dotenvConfig) log('Missing dotenv dependencies, assuming it\'s a release.', 'NODEJS', severity.WARN);
-else dotenvConfig();
+import('dotenv')
+  .then(dotenv => {
+    dotenv.config();
+  }).catch(error => {
+    log('Missing dotenv dependencies, skipping it!', 'NODEJS', severity.WARN);
+});
 
 const client = new Bot();
 

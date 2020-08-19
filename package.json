@@ -2,10 +2,15 @@
   "name": "bobpool",
   "version": "1.0.0",
   "description": "A discord bot dedicated to Random Feeders server",
+  "engines": {
+    "node": "14.3.0",
+    "npm": "6.14.5"
+  },
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev --respawn src/index.ts",
-    "build": "tsc"
+    "build": "ts-node src/index.ts",
+    "heroku-postbuild": "tsc"
   },
   "repository": {
     "type": "git",
