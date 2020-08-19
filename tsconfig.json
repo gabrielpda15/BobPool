@@ -2,12 +2,15 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "target": "ES2018",
+    "target": "ES2020",
     "module": "commonjs",
     "resolveJsonModule": true,
+    "strict": true,
     "strictNullChecks": false,
     "esModuleInterop": true,
-    "sourceMap": true
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
