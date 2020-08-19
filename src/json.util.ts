@@ -46,6 +46,6 @@ interface JsonEmbedField {
 
 function getDescription(value: string | string[], separator?: string): string {
     if (value instanceof String) return <string>value;
-    else if (Array.isArray(value)) return (<string[]>value).join(separator ?? '');
+    else if (Array.isArray(value)) return (<string[]>value).join(separator == null ? '' : separator);
     else return null;
 }
