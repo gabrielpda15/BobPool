@@ -3,7 +3,7 @@ import * as Discord from 'discord.js';
 import { logOnChannel, log, activityLoop, severity } from './util';
 import { client } from './index';
 import config from '../config.json';
-import { reactions } from './messages/config.json'
+import messages from './messages/messages';
 import emojis from './emojis.json';
 
 export class Program {
@@ -116,7 +116,9 @@ export class Program {
 
   private async onReactionAdded(r: Discord.MessageReaction, u: Discord.User | Discord.PartialUser): Promise<void> {
     try {
-      if (config.adminConfig.trackedMessages.includes(r.message.id)) {
+      if (Object.values(config.adminConfig.trackedMessages).includes(r.message.id)) {        
+        const chat = Object.keys(config.adminConfig.trackedMessages)
+          .find(k => (config.adminConfig.trackedMessages as any)[k] === r.message.id);
         await r.users.remove(u.id);
         let emoji = '';
         let index = Object.values(emojis).indexOf(r.emoji.name);
@@ -125,7 +127,12 @@ export class Program {
         } else {
           emoji = r.emoji.id;
         }
-        let reaction: {type:string, value:string} = (reactions as any)[emoji];
+
+        let temp = (messages as any)[chat].reactions;
+        if (!temp) return;
+        
+        let reaction: { type: string, value: string } = temp[emoji];
+        
         switch (reaction.type) {
           case 'dm':
             const dm = await u.createDM();
