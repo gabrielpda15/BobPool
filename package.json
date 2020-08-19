@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev --respawn src/index.ts",
-    "build": "ts-node src/index.ts",
+    "build": "tsc && cd dist && node src/index.js",
     "heroku-postbuild": "tsc"
   },
   "repository": {
