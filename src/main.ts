@@ -116,7 +116,7 @@ export class Program {
 
   private async onReactionAdded(r: Discord.MessageReaction, u: Discord.User | Discord.PartialUser): Promise<void> {
     try {
-      if (config.adminConfig.configMessageId === r.message.id) {
+      if (config.adminConfig.trackedMessages.includes(r.message.id)) {
         await r.users.remove(u.id);
         let emoji = '';
         let index = Object.values(emojis).indexOf(r.emoji.name);
