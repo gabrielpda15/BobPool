@@ -5,5 +5,12 @@
     "rightarrow": "\u27A1",
     "leftarrow": "\u2B05",
     "uparrow": "\u2B06",
-    "downarrow": "\u2B07"
+    "downarrow": "\u2B07",
+    "hammer": "\uD83D\uDD28",
+    "foot": "\uD83E\uDDB6",
+    "x": "\u274C",
+    "no_entry": "\uD83D\uDEAB",
+    "speech": "\uD83D\uDCAC",
+    "pinching_hand": "\uD83E\uDD0F",
+    "white_flag": "\uD83C\uDFF3\uFE0F"
 }
