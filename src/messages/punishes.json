@@ -1,0 +1,56 @@
+{
+    "hammer": {
+        "action": "ban",
+        "limit": 0.5,
+        "priority": 10,
+        "title": "Banimento",
+        "result": "Foi optado pelo banimento permanente.",
+        "text": "{{target}} foi sentenciado a um banimento do servidor após votação.",
+        "dm": "Você foi setenciado a um banimento permanente do servidor Random Feeders!"
+    },
+    "foot": {
+        "action": "kick",
+        "limit": null,
+        "priority": 30,
+        "title": "Expulsão",
+        "result": "Foi optado pela expulsão.",
+        "text": "{{target}} foi sentenciado a uma expulsão do servidor após votação.",
+        "dm": "Você foi expulso do servidor Random Feeders! Caso deseje voltar lembre-se de respeitar nossas regras e diretrises!"
+    },
+    "no_entry": {
+        "action": "block",
+        "limit": null,
+        "priority": 20,
+        "title": "Bloqueio",
+        "result": "Foi optado pelo bloqueio, selecione o numero de dias abaixo.",
+        "text": "{{target}} foi sentenciado a um bloqueio do servidor por {{time}} após votação.",
+        "dm": "Você foi bloqueado no servidor Random Feeders, seu bloqueio vai durar {{time}}."
+    },
+    "speech": {
+        "action": "none",
+        "limit": null,
+        "priority": 60,
+        "title": "Conversa",
+        "result": "Foi optado por ter uma conversa.",
+        "text": "{{target}} foi sentenciado a ter uma conversa com a staff após votação.",
+        "dm": "A staff do servidor Random Feeders deseja ter uma conversa em particular com você."
+    },
+    "pinching_hand": {
+        "action": "none",
+        "limit": 0.5,
+        "priority": 50,
+        "title": "Pinto Pequeno",
+        "result": "Foi optado pelo considera-lo um individuo com pênis pequeno",
+        "text": "{{target}} foi considerado um individuo de pênis pequeno após votação.",
+        "dm": "A staff do servidor Random Feeders considera você um indivíduo de pênis pequeno!"
+    }, 
+    "white_flag": {
+        "action": "none",
+        "limit": null,
+        "priority": 40,
+        "title": "Perdoado",
+        "result": "Foi optado por perdoa-lo(a).",
+        "text": "{{target}} foi perdoado de seus atos após votação.",
+        "dm": "A staff do servidor Random Feeders perdoou você, mas esperamos que não se repita!"
+    }
+}

@@ -23,15 +23,21 @@ export class Program {
   public async start(): Promise<void> {
     try {
       const dotenv = await import('dotenv').catch(error => { throw error; });
-      if (process.env.TS_NODE_DEV) dotenv.config({ path: 'D:\Documentos\NodeJS\Projects\BobPool\.env' });
-      else dotenv.config({ path: '../.env' });
+      let result;
+      if (process.env.TS_NODE_DEV) result = dotenv.config({ path: 'D:\\Documentos\\NodeJS\\Projects\\BobPool\\.env' });
+      else result = dotenv.config({ path: '../.env' });
+      if (result.parsed) log('Successfuly applied environment variables!', 'DOTENV', severity.INFO);
+      else log(result.error.message, 'DOTENV', severity.ERROR);
     }
     catch (error) {
       log('Missing dotenv dependencies, skipping it!', 'NODEJS', severity.WARN);
     }
     
     log(`Connecting to discord...`, 'DISCORD', severity.INFO);
-    await client.login(process.env.token);
+    if (process.env.token)
+      await client.login(process.env.token);
+    else
+      log('The token is invalid! Try restarting the bot!', 'TOKEN', severity.CRIT);
   }
 
   private async onDebug(value: string): Promise<void> {
@@ -45,7 +51,7 @@ export class Program {
         for (let channel of guild.channels.cache.array()) {
           if (channel.type == 'text') {
             let textChannel = (channel as Discord.TextChannel);
-            textChannel.messages.fetch({ limit: 20 });
+            try { await textChannel.messages.fetch({ limit: 20 }); } catch { }
           }
         }
       }
