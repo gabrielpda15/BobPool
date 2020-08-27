@@ -17,6 +17,22 @@ class Embed implements ICommand {
 	public args: number = 1;
 
 	public async execute(message: Discord.Message, args: string[]) {
+        await message.delete();
+
+        if (['template', 'help', 'format', '?'].includes(args[0])) {
+            message.channel.send(`\`\`\`json
+                {
+                    "type": "embed",
+                    "title": "TITULO",
+                    "description": [ "DESCRICAO", " EM UMA SÓ LINHA" ],
+                    "thumbnailUrl": "URL"
+                    "fields": [
+                        { "title": "TITULO", "description": [ "DESCRICAO" ] }
+                    ]
+                }            
+            \`\`\``);
+        }
+
         const json = args.join(' ');
         const embed = convertJson(JSON.parse(json));
         await message.channel.send(embed);
