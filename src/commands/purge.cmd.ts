@@ -18,7 +18,7 @@ class Purge implements ICommand {
 
 	public async execute(message: Discord.Message, args: string[]) {
         
-        if (!isNaN(+args[0]) && +args[0] > 0) {
+        if (isNaN(+args[0]) && +args[0] > 0) {
             await message.channel.send(`O argumento \`${args[0]}\` deve ser um numero inteiro maior que zero!`);
             return;
         }
