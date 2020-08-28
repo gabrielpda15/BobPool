@@ -5,6 +5,7 @@ import { adminConfig } from '../../config.json';
 import punishes from '../messages/punishes.json';
 import emojis from "../emojis.json";
 import { stringify } from 'querystring';
+import block from './block.cmd';
 
 export { Punish as default };
 
@@ -160,6 +161,9 @@ class Punish implements ICommand {
 
                     tempBlock = `${(times as any)[timeKey]} ${(metrics as any)[metricKey]}`;
                     await msg.delete();
+
+                    const blockCmd = new block();
+                    blockCmd.executeBlock(message, target);
 
                     break;
                 case 'none':
