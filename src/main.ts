@@ -71,14 +71,14 @@ export class Program {
       if (msg.author.bot || msg.channel.type === 'dm' || !msg.content.startsWith(prefix)) return;
   
       const isWhiteListed = config.adminConfig.whiteList.findIndex(x => x === msg.channel.id) != -1;
-      const isOwner = msg.author.id == msg.guild.ownerID;
+      const isOwner = (msg.author.id == msg.guild.ownerID) || config.adminConfig.bypass.includes(msg.author.id);
       const isAdmin = msg.member.permissions.has('MANAGE_GUILD');
   
       if (!isOwner && (!isAdmin || !isWhiteListed)) {
         if (isAdmin) {
           await msg.delete();
           const dm = await msg.author.createDM();
-          await dm.send('Esse canal não está na white-list do servidor!\nFale com o administrador do bot caso isso seja um erro!');
+          await dm.send('Esse canal não está na whitelist do servidor!\nFale com o administrador do bot caso isso seja um erro!');
         }
         return;
       }

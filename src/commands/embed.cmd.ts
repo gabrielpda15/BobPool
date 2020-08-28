@@ -21,16 +21,17 @@ class Embed implements ICommand {
 
         if (['template', 'help', 'format', '?'].includes(args[0])) {
             message.channel.send(`\`\`\`json
-                {
-                    "type": "embed",
-                    "title": "TITULO",
-                    "description": [ "DESCRICAO", " EM UMA SÓ LINHA" ],
-                    "thumbnailUrl": "URL"
-                    "fields": [
-                        { "title": "TITULO", "description": [ "DESCRICAO" ] }
-                    ]
-                }            
-            \`\`\``);
+{
+    "type": "embed",
+    "title": "TITULO",
+    "description": [ "DESCRICAO", " EM UMA SÓ LINHA" ],
+    "timeout": 10000,
+    "thumbnailUrl": "URL",
+    "fields": [
+        { "title": "TITULO", "description": [ "DESCRICAO" ] }
+    ]
+}\`\`\``);
+            return;
         }
 
         const json = args.join(' ');
