@@ -32,25 +32,28 @@ class Purge implements ICommand {
         let count = 0;
 
         while (!done) {
-            let messages = await message.channel.messages.fetch({ limit: +args[0] - count > 50 ? 50 : +args[0] - count });
+            const limit = +args[0] - count > 50 ? 50 : +args[0] - count + 1;
+            let messages = await message.channel.messages.fetch({ limit: limit });
 
-            for (let item of (Object.values(messages) as Discord.Message[])) {
-                if (mentionedUsers.length > 0) {
-                    if (mentionedUsers.includes(item.author.id)) {
-                        await item.delete();
+            for (let item of messages) {
+                if (item[0] != msg.id) {
+                    if (mentionedUsers.length > 0) {
+                        if (mentionedUsers.includes(item[1].author.id)) {
+                            await item[1].delete();
+                            count++;
+                            await msg.edit(`Excluida ${count}/${args[0]} mensagens!`);
+                        }
+                    } else {
+                        await item[1].delete();
                         count++;
                         await msg.edit(`Excluida ${count}/${args[0]} mensagens!`);
                     }
-                } else {
-                    await item.delete();
-                    count++;
-                    await msg.edit(`Excluida ${count}/${args[0]} mensagens!`);
-                }
-
-                if (count >= Number.parseInt(args[0])) {
-                    done = true;
-                    break;
-                }
+    
+                    if (count >= Number.parseInt(args[0])) {
+                        done = true;
+                        break;
+                    }
+                }               
             }
         }
 
