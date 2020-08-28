@@ -32,7 +32,7 @@ class Purge implements ICommand {
         let count = 0;
 
         while (!done) {
-            let messages = await message.channel.messages.fetch();
+            let messages = await message.channel.messages.fetch({ limit: +args[0] - count > 50 ? 50 : +args[0] - count });
 
             for (let item of (Object.values(messages) as Discord.Message[])) {
                 if (mentionedUsers.length > 0) {
