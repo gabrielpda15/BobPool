@@ -12,7 +12,8 @@
         ":arrow_right: Ou por acaso você joga alguns dos jogos abaixo?\n",
         "<:league_of_legends:743167521896792124> Liga das Lendas\n",
         "<:valorant:743167364518117517> Valorant\n",
-        "<:minecraft:743166770667585597> Minecraft\n"
+        "<:minecraft:743166770667585597> Minecraft\n",        
+        "<:amongas:759625447453097984> Among Us\n"
     ],
     "thumbnailUrl": "https://i.imgur.com/OvqCRMZ.png",
     "reactions": {
@@ -43,6 +44,10 @@
         "743166770667585597": {
             "type": "role",
             "value": "742743055806758972"
+        },
+        "759625447453097984": {
+            "type": "role",
+            "value": "758467303967948822"
         }
     }
 }
