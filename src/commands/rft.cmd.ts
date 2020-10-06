@@ -24,6 +24,7 @@ class Rft implements ICommand {
         roles.push(adminConfig.rft.participant);
 
         let msg: Discord.Message;
+        await message.delete();
 
         switch (args[0]) {
             case 'team':
