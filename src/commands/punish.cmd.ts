@@ -39,7 +39,7 @@ class Punish implements ICommand {
 	public name: string = 'punish';
 	public description: string = 'Abre uma votação de punimento para a pessoa marcada.';
 	public usage: string[] = [ '[menção do usuário] [motivo]' ];
-	public category: category = category.INFORMATION;
+	public category: category = category.ADMINISTRATIVE;
 	public aliases: string[] = [];
 	public onlyOwner: boolean = false;
 	public requireArgs: boolean = true;

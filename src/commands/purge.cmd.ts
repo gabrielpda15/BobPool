@@ -10,7 +10,7 @@ class Purge implements ICommand {
 	public name: string = 'purge';
 	public description: string = 'Apaga o numero de mensagens definidas. Opcionalmente de um usuário apenas';
 	public usage: string[] = [ '[nº menssagens] <menção usuário>' ];
-	public category: category = category.INFORMATION;
+	public category: category = category.ADMINISTRATIVE;
 	public aliases: string[] = [ 'clear', 'prune'];
 	public onlyOwner: boolean = false;
 	public requireArgs: boolean = true;
