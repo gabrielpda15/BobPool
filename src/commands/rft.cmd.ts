@@ -33,12 +33,12 @@ class Rft implements ICommand {
                         for (let member of message.mentions.members) {
                             member[1].roles.add((adminConfig.rft.teams as any)[args[1]]);
                         }
-                        await message.channel.send(`Cargo adicionado com sucesso!`);
+                        msg = await message.channel.send(`Cargo adicionado com sucesso!`);
                     } else {
-                        await message.channel.send(`Lembre-se de marcar ao menos um membro.`);
+                        msg = await message.channel.send(`Lembre-se de marcar ao menos um membro.`);
                     }
                 } else {
-                    await message.channel.send(`Os time são números entre ${teams[0]} e ${teams[teams.length - 1]}.`);
+                    msg = await message.channel.send(`Os time são números entre ${teams[0]} e ${teams[teams.length - 1]}.`);
                 }
                 break;
             case 'game':
@@ -48,12 +48,12 @@ class Rft implements ICommand {
                         for (let member of message.mentions.members) {
                             member[1].roles.add((adminConfig.rft.games as any)[args[1]]);
                         }
-                        await message.channel.send(`Cargo adicionado com sucesso!`);
+                        msg = await message.channel.send(`Cargo adicionado com sucesso!`);
                     } else {
-                        await message.channel.send(`Lembre-se de marcar ao menos um membro.`);
+                        msg = await message.channel.send(`Lembre-se de marcar ao menos um membro.`);
                     }
                 } else {
-                    await message.channel.send(`Os games são letras entre ${games[0]} e ${games[games.length - 1]}.`);
+                    msg = await message.channel.send(`Os games são letras entre ${games[0]} e ${games[games.length - 1]}.`);
                 }
                 break;
             case 'clear':
@@ -64,9 +64,9 @@ class Rft implements ICommand {
                                 await member[1].roles.remove(role);
                         }
                     }
-                    await message.channel.send(`Cargos removidos com sucesso!`);
+                    msg = await message.channel.send(`Cargos removidos com sucesso!`);
                 } else {
-                    await message.channel.send(`Lembre-se de marcar ao menos um membro.`);
+                    msg = await message.channel.send(`Lembre-se de marcar ao menos um membro.`);
                 }
                 break;
             case 'clearall':
@@ -87,8 +87,10 @@ class Rft implements ICommand {
                 msg.edit(`Removido ${roles.length} cargos dos usuários.`);
                 break;
             default:
-                await message.channel.send(`As unicas opções para argumentos são: ${this.usage[0]}`);
+                msg = await message.channel.send(`As unicas opções para argumentos são: ${this.usage[0]}`);
                 break;
         }
+
+        setTimeout(async () => await msg.delete(), 5000);
 	}
 }
