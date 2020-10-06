@@ -55,6 +55,7 @@ class Rft implements ICommand {
                 } else {
                     await message.channel.send(`Os games são letras entre ${games[0]} e ${games[games.length - 1]}.`);
                 }
+                break;
             case 'clear':
                 if (message.mentions.members.size >= 1) {
                     for (let member of message.mentions.members) {
@@ -67,6 +68,7 @@ class Rft implements ICommand {
                 } else {
                     await message.channel.send(`Lembre-se de marcar ao menos um membro.`);
                 }
+                break;
             case 'clearall':
                 msg = await message.channel.send(`Removendo membros de ${roles.length} cargos...`);
                 let msg2 = await message.channel.send(`Iniciando...`);
@@ -82,7 +84,11 @@ class Rft implements ICommand {
                     await msg.edit(`Cargo \`${role.name}\` removido de ${t} membros com sucesso. ${++k}/${roles.length} restantes.`);
                 }
                 await msg2.delete();
-                msg.edit(`Removido ${roles.length} cargos dos usuários.`)                
+                msg.edit(`Removido ${roles.length} cargos dos usuários.`);
+                break;
+            default:
+                await message.channel.send(`As unicas opções para argumentos são: ${this.usage[0]}`);
+                break;
         }
 	}
 }
