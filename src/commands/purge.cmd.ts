@@ -18,46 +18,26 @@ class Purge implements ICommand {
 
 	public async execute(message: Discord.Message, args: string[]) {
         
-        if (isNaN(+args[0]) && +args[0] > 0) {
-            await message.channel.send(`O argumento \`${args[0]}\` deve ser um numero inteiro maior que zero!`);
+        let n = +args[0];
+
+        if (isNaN(n) && n > 1) {
+            await message.channel.send(`O argumento \`${n}\` deve ser um numero inteiro maior que um!`);
             return;
         }
 
-        await message.delete();
-        let msg = await message.channel.send('Iniciando processo de exclusão...');
-        const mentionedUsers = message.mentions.members.size > 0 ? 
-            (Object.values(message.mentions.members) as Discord.GuildMember[]).map(x => x.id) :
-            [];
-        let done = false;
-        let count = 0;
+        n = n + 2;
 
-        while (!done) {
-            const limit = +args[0] - count > 50 ? 50 : +args[0] - count + 1;
-            let messages = await message.channel.messages.fetch({ limit: limit });
+        await message.channel.send('Iniciando processo de exclusão...');
 
-            for (let item of messages) {
-                if (item[0] != msg.id) {
-                    if (mentionedUsers.length > 0) {
-                        if (mentionedUsers.includes(item[1].author.id)) {
-                            await item[1].delete();
-                            count++;
-                            await msg.edit(`Excluida ${count}/${args[0]} mensagens!`);
-                        }
-                    } else {
-                        await item[1].delete();
-                        count++;
-                        await msg.edit(`Excluida ${count}/${args[0]} mensagens!`);
-                    }
-    
-                    if (count >= Number.parseInt(args[0])) {
-                        done = true;
-                        break;
-                    }
-                }               
+        for (let i = n; i > 0; i = i - 100) {
+            if (n > 100) {
+                await (message.channel as Discord.TextChannel).bulkDelete(100);
+            } else {
+                await (message.channel as Discord.TextChannel).bulkDelete(i);
             }
         }
 
-        await msg.edit(`Finalizado!`);
-        setTimeout(async () => await msg.delete(), 5000);        
+        let msg = await message.channel.send(':white_check_mark: Pronto!!!');
+        setTimeout(async () => await msg.delete(), 3000);
 	}
 }
