@@ -1,9 +1,9 @@
 {
-    "type": "message",
-    "value": [
+    "type": "embed",
+    "title": "Leia-me",
+    "description": [
         "Bem-vindo ao servidor Random Feeders!\n\n",
         "Leia as <#675149169618321428> do servidor antes de qualquer coisa!!!\n",
-        "Para continuar a usar o nosso discord normalmente lembre-se de aceitar nossas regras!\n",
         "Caso queira dar suporte ao servidor com uma doação vá para <#742649751669047327>.\n",
         "Lembre-se de dar uma passada no chat <#743154553863798894> e dizer como podemos melhorar!\n\n",        
         "Como usar o servidor:\n",
@@ -16,14 +16,27 @@
         "7. Leia as regras e Divirta-se <:kappa:333376326469943296>\n\n",
         "Para entrar nos chats exclusivos contate um <@&324618372333436929>!\n",
         "Para conseguir acesso a diversos chats para vários temas vá para <#745491311905210388> e ",
-        "selecione os cargos que deseja ter.\n\n",        
-        "Convide amigos:\n",
-        "http://discord.randomfeeders.com.br/\n\n",
-        "Site:\n",
-        "http://randomfeeders.com.br\n\n",
-        "Email:\n",
-        "`contato@randomfeeders.com.br`\n\n",
-        "Temos grupo no Whatsapp:\n",
-        "https://chat.whatsapp.com/I5q3FQCYbY30QorWe4oghW"
+        "selecione os cargos que deseja ter."
+    ],
+    "thumbnailUrl": "https://belavista.go.gov.br/wp-content/uploads/2019/03/info.png",
+    "fields": [
+        { 
+            "title": "Convide amigos", 
+            "description": [
+                "http://discord.randomfeeders.com.br/"
+            ]
+        },
+        { 
+            "title": "Site", 
+            "description": [
+                "http://randomfeeders.com.br/" 
+            ]
+        },
+        { 
+            "title": "Email", 
+            "description": [
+                "`contato@randomfeeders.com.br`" 
+            ]
+        }
     ]
 }

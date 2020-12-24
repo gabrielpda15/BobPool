@@ -1,6 +1,7 @@
 {
-    "type": "message",
-    "value": [
+    "type": "embed",
+    "title": "Atenção!",
+    "description": [
         "Olá!\n",
         "Se você está vendo esse chat você foi bloqueado do servidor!\n",
         "Ou seja, você recebeu uma restrição de comunicação em todos os chats de texto e voz, ",
