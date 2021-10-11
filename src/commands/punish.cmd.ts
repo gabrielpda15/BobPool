@@ -62,11 +62,11 @@ class Punish implements ICommand {
             await message.reply(`envie apenas uma imagem com o comando!`);
             return;
         }
-        
-        console.log(target.toString());
-        console.log(args.shift());
 
-        if (target.toString() != args.shift()) {
+        const targetMention = target.toString().replace('!', '');
+        const argsMention = args.shift().replace('!', '');
+
+        if (targetMention != argsMention) {
             await message.reply(`lembre-se de primeiro marcar o usuario e depois escrever o motivo!`);
             return;
         }
