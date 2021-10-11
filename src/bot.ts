@@ -29,7 +29,7 @@ export class Bot extends Discord.Client {
                     }
                 }
                 catch (error) {
-                    log(error, 'CMD_IMPORT', severity.ERROR);
+                    log(<string>error, 'CMD_IMPORT', severity.ERROR);
                 }
             }            
         }

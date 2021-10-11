@@ -34,7 +34,7 @@ export async function logOnChannel(client: Discord.Client, msg: Discord.Message,
     try {
         const channel = await client.channels.fetch(config.log.channel);
     
-        if (channel && channel.type === 'text') {
+        if (channel && channel.type === 'GUILD_TEXT') {
             const txtChannel = channel as Discord.TextChannel;
             const logText = config.log.format
                 .replace('{date}', new Date().toLocaleString(process.env.locale))
@@ -78,9 +78,9 @@ export function createEmbed(title: string, desc: string) {
     if (Array.isArray(config.embedColor)) colors = config.embedColor;
 
     if (config.embedColor === 'random' || Array.isArray(config.embedColor)) {
-        embed = embed.setColor(colors[getRandom(0, colors.length)]);
+        embed = embed.setColor(colors[getRandom(0, colors.length)] as Discord.HexColorString);
     } else if (config.embedColor.startsWith('#') && config.embedColor.length == 7) {
-        embed = embed.setColor(config.embedColor);
+        embed = embed.setColor(config.embedColor as Discord.HexColorString);
     }
 
     return embed;
@@ -94,7 +94,7 @@ export function groupBy<t, tv>(xs: t[], keySelector: (v:t) => string, mapper: (v
 };
 
 export interface ReactionHandler {
-    (args_0: Discord.MessageReaction, args_1: Discord.User | Discord.PartialUser): void;
+    (args_0: Discord.MessageReaction | Discord.PartialMessageReaction, args_1: Discord.User | Discord.PartialUser): void;
 }
 
 interface String {

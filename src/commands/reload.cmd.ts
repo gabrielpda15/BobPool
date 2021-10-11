@@ -27,7 +27,7 @@ class Reload implements ICommand {
         catch (error) {
             let embed = createEmbed('Houve um erro ao recarregar os comandos!', `\n\n\`\`\`${error}\`\`\``);
             embed = embed.setFooter('Essa mensagem será excluida em 10 segundos.');
-            let msg = await message.channel.send(embed);
+            let msg = await message.channel.send({ embeds: [ embed ] });
             setTimeout(async () => { await msg.delete(); }, 10000);
         }
 	}

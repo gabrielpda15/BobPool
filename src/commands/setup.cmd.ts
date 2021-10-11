@@ -37,8 +37,10 @@ class Setup implements ICommand {
 
 		let json = (messages as any)[args[0]];
 		let result = convertJson(json);
+		let msg: Discord.Message;
 
-		let msg = await message.channel.send(result);
+		if (typeof result === 'string') msg = await message.channel.send(result);
+		else msg = await message.channel.send({ embeds: [ result ] });
 
 		if (json.reactions) {
 			for (var emoji in json.reactions) {

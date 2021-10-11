@@ -24,7 +24,7 @@ export class Program {
     try {
       const dotenv = await import('dotenv').catch(error => { throw error; });
       let result;
-      if (process.env.TS_NODE_DEV) result = dotenv.config({ path: 'D:\\Documentos\\NodeJS\\Projects\\BobPool\\.env' });
+      if (process.env.TS_NODE_DEV) result = dotenv.config({ path: `${__dirname}\\..\\.env` });
       else result = dotenv.config({ path: '../.env' });
       if (result.parsed) log('Successfuly applied environment variables!', 'DOTENV', severity.INFO);
       else log(result.error.message, 'DOTENV', severity.ERROR);
@@ -47,9 +47,9 @@ export class Program {
   private async onReady(): Promise<void> {
     try {
       log(`Logged in as ${client.user.tag}!`, 'DISCORD', severity.INFO);  
-      for (let guild of client.guilds.cache.array()) {
-        for (let channel of guild.channels.cache.array()) {
-          if (channel.type == 'text') {
+      for (let guild of client.guilds.cache.values()) {
+        for (let channel of guild.channels.cache.values()) {
+          if (channel.type == 'GUILD_TEXT') {
             let textChannel = (channel as Discord.TextChannel);
             try { await textChannel.messages.fetch({ limit: 20 }); } catch { }
           }
@@ -59,7 +59,7 @@ export class Program {
       log(`Ready!`, 'DISCORD', severity.INFO);
     }
     catch (error) {
-      log(error, 'NODEJS', severity.ERROR);
+      log(<string>error, 'NODEJS', severity.ERROR);
     }
   }
 
@@ -68,10 +68,10 @@ export class Program {
       const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
       const prefix = msg.content.match(prefixMention) ? msg.content.match(prefixMention)[0] : process.env.prefix;
   
-      if (msg.author.bot || msg.channel.type === 'dm' || !msg.content.startsWith(prefix)) return;
+      if (msg.author.bot || msg.channel.type === 'DM' || !msg.content.startsWith(prefix)) return;
   
       const isWhiteListed = config.adminConfig.whiteList.findIndex(x => x === msg.channel.id) != -1;
-      const isOwner = (msg.author.id == msg.guild.ownerID) || config.adminConfig.bypass.includes(msg.author.id);
+      const isOwner = (msg.author.id == msg.guild.ownerId) || config.adminConfig.bypass.includes(msg.author.id);
       const isAdmin = msg.member.permissions.has('MANAGE_GUILD');
   
       if (!isOwner && (!isAdmin || !isWhiteListed)) {
@@ -114,13 +114,13 @@ export class Program {
       await logOnChannel(client, msg, `Comando ${commandName} utilizado.`);
     }
     catch (error) {
-      log(error, 'NODEJS', severity.ERROR);
-      logOnChannel(client, msg, error);
+      log(<string>error, 'NODEJS', severity.ERROR);
+      logOnChannel(client, msg, <string>error);
       await msg.channel.send('Aconteceu um erro ao executar esse comando!');
     }
   }
-
-  private async onReactionAdded(r: Discord.MessageReaction, u: Discord.User | Discord.PartialUser): Promise<void> {
+  
+  private async onReactionAdded(r: Discord.MessageReaction | Discord.PartialMessageReaction, u: Discord.User | Discord.PartialUser): Promise<void> {
     try {
       if (Object.values(config.adminConfig.trackedMessages).includes(r.message.id)) {        
         const chat = Object.keys(config.adminConfig.trackedMessages)
@@ -152,7 +152,7 @@ export class Program {
       }
     }
     catch (error) {
-      log(error, 'NODEJS', severity.ERROR);
+      log(<string>error, 'NODEJS', severity.ERROR);
     }
   }
 

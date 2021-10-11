@@ -36,6 +36,7 @@ class Embed implements ICommand {
 
         const json = args.join(' ');
         const embed = convertJson(JSON.parse(json));
-        await message.channel.send(embed);
+        if (typeof embed == 'string') return;
+        await message.channel.send({ embeds: [ embed ]});
 	}
 }

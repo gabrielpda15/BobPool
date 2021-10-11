@@ -18,11 +18,11 @@ class Status implements ICommand {
     public async execute(message: Discord.Message, args: string[]) {
         switch (args[0]) {
             case 'inv':
-                await message.client.user.setStatus('invisible');
+                message.client.user.setStatus('invisible');
                 await message.channel.send('Pronto! Agora estou invisivel!');
                 break;
             case 'online':
-                await message.client.user.setStatus('online');
+                message.client.user.setStatus('online');
                 await message.channel.send('Pronto! Agora estou online!');
                 break;
             default:

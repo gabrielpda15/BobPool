@@ -38,7 +38,7 @@ class Rft implements ICommand {
                         Discord: ${subArgs[2]}\n
                         Nick do LoL: ${subArgs[3]}\n
                     `);
-                    await message.mentions.channels.first().send(embed);
+                    await (message.mentions.channels.first() as Discord.TextChannel).send({ embeds: [ embed ] });
                 } else {
                     msg = await message.channel.send('São necessário exatos 4 argumentos para esse comando.');
                 }

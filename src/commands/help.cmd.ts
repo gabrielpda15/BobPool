@@ -36,7 +36,7 @@ class Help implements ICommand {
                     temp = command.usage.map(x => x != '' ? `\`${process.env.prefix}${command.name} ${x}\`` : `\`${process.env.prefix}${command.name}\``).join('\n');
                     if (temp && temp != '') embed = embed.addField(title, temp);
                 }
-                await message.channel.send(embed);
+                await message.channel.send({ embeds: [embed] });
             } else {
                 await message.channel.send(`Desculpe não conheço o comando \`${args[0]}\`!`);
             }
@@ -46,7 +46,7 @@ class Help implements ICommand {
         embed = createEmbed('Todos os Comandos', 
             `Utilize \`${process.env.prefix}help <nome do comando>\` para obter ajuda mais detalhada!`);
 
-        let result = groupBy((message.client as Bot).commands.array(), x => x.category, x => `\`${x.name}\``);
+        let result = groupBy(Array.from((message.client as Bot).commands.values()), x => x.category, x => `\`${x.name}\``);
         
         for (let key in result) {
             const desc = result[key].join(', ');
@@ -55,7 +55,7 @@ class Help implements ICommand {
             }
         }
 
-        await message.channel.send(embed);
+        await message.channel.send({ embeds: [ embed ] });
     }
     
 }

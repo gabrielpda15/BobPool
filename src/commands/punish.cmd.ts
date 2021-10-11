@@ -63,6 +63,9 @@ class Punish implements ICommand {
             return;
         }
         
+        console.log(target.toString());
+        console.log(args.shift());
+
         if (target.toString() != args.shift()) {
             await message.reply(`lembre-se de primeiro marcar o usuario e depois escrever o motivo!`);
             return;
@@ -72,7 +75,7 @@ class Punish implements ICommand {
         const evidence = message.attachments.first();
 
         let embed = this.getPunishVoteEmbed(message.member.toString(), target.toString(), reason, evidence);
-        let msg = await message.channel.send(embed);
+        let msg = await message.channel.send({ embeds: [ embed ]});
 
         let votes: votesType = {};
 
@@ -132,7 +135,7 @@ class Punish implements ICommand {
                 }
             }
 
-            await msg.edit(this.getPunishEndVoteEmbed(embed, votes, (punishes as punishesType)[result.key].result, evidence));
+            await msg.edit({ embeds: [ this.getPunishEndVoteEmbed(embed, votes, (punishes as punishesType)[result.key].result, evidence) ] });
 
             let tempBlock = '';
             
@@ -149,13 +152,13 @@ class Punish implements ICommand {
                     msg = await message.channel.send('Por quanto tempo ele(a) deve ser bloqueado?');
                     
                     for (let emoji of Object.keys(times).map(x => (emojis as any)[x])) await msg.react(emoji);                    
-                    const filter: Discord.CollectorFilter = (r, u) => u.id === message.member.id;
-                    const timeReactions = await msg.awaitReactions(filter, { max: 1, time: 10000 });
+                    const filter: Discord.CollectorFilter<[Discord.MessageReaction, Discord.User]> = (r, u) => u.id === message.member.id;
+                    const timeReactions = await msg.awaitReactions({ filter: filter, max: 1, time: 10000 });
                     await msg.reactions.removeAll();
                     const timeKey = Object.keys(emojis).find(x => (emojis as any)[x] === timeReactions.first().emoji.name);
 
                     for (let emoji of Object.keys(metrics).map(x => (emojis as any)[x])) await msg.react(emoji);
-                    const metricReactions = await msg.awaitReactions(filter, { max: 1, time: 10000 });
+                    const metricReactions = await msg.awaitReactions({ filter: filter, max: 1, time: 10000 });
                     await msg.reactions.removeAll();
                     const metricKey = Object.keys(metrics).find(x => (emojis as any)[x] === metricReactions.first().emoji.name);
 
@@ -172,9 +175,9 @@ class Punish implements ICommand {
             }
 
             const punishChannel = message.guild.channels.cache.get(adminConfig.punishChannel) as Discord.TextChannel;
-            await punishChannel.send(this.getPunishEmbed((punishes as punishesType)[result.key], votes, reason, target.toString(), evidence, false, tempBlock));
+            await punishChannel.send({ embeds: [ this.getPunishEmbed((punishes as punishesType)[result.key], votes, reason, target.toString(), evidence, false, tempBlock) ] });
             const dmChannel = await target.createDM(true);
-            await dmChannel.send(this.getPunishEmbed((punishes as punishesType)[result.key], votes, reason, target.toString(), evidence, true, tempBlock));
+            await dmChannel.send({ embeds: [ this.getPunishEmbed((punishes as punishesType)[result.key], votes, reason, target.toString(), evidence, true, tempBlock) ] });
             
         }, 10000);        
     }

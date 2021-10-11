@@ -45,14 +45,14 @@ class Group implements ICommand {
         let list: string[] = [];
 
         const embed = convertJson(json) as Discord.MessageEmbed;
-        let msg = await message.channel.send(embed);
+        let msg = await message.channel.send({ embeds: [ embed ]});
         await msg.react(message.guild.emojis.cache.get(this.emoji));
 
         embed.addField('Participantes', 'Nenhum');
         
         const reloadEmbed = async () => {
             embed.fields[embed.fields.length - 1].value = list.length == 0 ? 'Nenhum' : list.map(x => getMention(x)).join(', ');
-            await msg.edit(embed);
+            await msg.edit({ embeds: [ embed ]});
         };
 
         const reactionAdded: ReactionHandler = async (r, u) => {
