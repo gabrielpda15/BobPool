@@ -109,6 +109,8 @@ class Punish implements ICommand {
             message.client.removeListener('messageReactionAdd', onReaction);
             await msg.reactions.removeAll();
             const nVotes = Object.values(votes).reduce((rv, x) => { rv += x.length; return rv }, 0);
+
+            if (nVotes == 0) return;
             
             let arrayVotes = Object.keys(votes).map(x => { return { key: x, value: votes[x] } });
                      
