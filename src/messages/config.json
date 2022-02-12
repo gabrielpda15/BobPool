@@ -13,7 +13,8 @@
         "<:league_of_legends:743167521896792124> Liga das Lendas\n",
         "<:valorant:743167364518117517> Valorant\n",
         "<:minecraft:743166770667585597> Minecraft\n",        
-        "<:gtav:930513177010114571> GTA V\n"
+        "<:gtav:930513177010114571> GTA V\n",        
+        "<:lostark:942059499823443979> Lost Ark\n"
     ],
     "thumbnailUrl": "https://i.imgur.com/OvqCRMZ.png",
     "reactions": {
@@ -48,6 +49,10 @@
         "930513177010114571": {
             "type": "role",
             "value": "845953421165199360"
+        },
+        "942059499823443979": {
+            "type": "role",
+            "value": "942058262365372476"
         }
     }
 }
