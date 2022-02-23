@@ -45,7 +45,7 @@ class Setup implements ICommand {
 		if (json.reactions) {
 			for (var emoji in json.reactions) {
 				if (emoji.startsWith('&')) {
-					await msg.react((emojis as any)[emoji.substr(1)]);
+					await msg.react((emojis as any)[emoji.substring(1)]);
 				} else {
 					await msg.react(message.guild.emojis.cache.get(emoji));
 				}

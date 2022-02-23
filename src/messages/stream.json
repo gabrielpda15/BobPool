@@ -1,0 +1,19 @@
+{
+    "type": "embed",
+    "title": "Naughty Stalker",
+    "description": [
+        "Interessado em ser um Naughty Stalker?\n",
+        "Reaja com :white_check_mark: no final dessa mensagem para ganhar o cargo :3\n\n",
+        "Não sabe o que é um Naughty Stalker?\n",
+        "Com esse cargo você vai ficar por dentro de qualquer novidade que eu irei compartilhar, ",
+        "assim como recebe notificações quando eu ficar online!\n\n",
+        "Desde já agradeço todo suporte que recebo de todos vocês <:AYAYA:914791286882598992>"
+    ],
+    "thumbnailUrl": "https://i.imgur.com/LuMP4yf.png",
+    "reactions": {
+        "&check": {
+            "type": "role",
+            "value": "945447551270797353"
+        }
+    }
+}
