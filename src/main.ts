@@ -146,7 +146,12 @@ export class Program {
             break;
           case 'role':
             const role = r.message.guild.roles.cache.get(reaction.value);
-            await r.message.guild.members.cache.get(u.id).roles.add(role);
+            const user = r.message.guild.members.cache.get(u.id);
+            if (user.roles.cache.some(r => r.id == role.id)) {
+              await user.roles.remove(role);
+            } else {
+              await user.roles.add(role);
+            }
             break;
         }
       }
