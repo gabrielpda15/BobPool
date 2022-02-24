@@ -14,7 +14,8 @@
         "<:valorant:743167364518117517> Valorant\n",
         "<:minecraft:743166770667585597> Minecraft\n",        
         "<:gtav:930513177010114571> GTA V\n",        
-        "<:lostark:942059499823443979> Lost Ark\n"
+        "<:lostark:942059499823443979> Lost Ark\n",
+        ":steam_locomotive: Valheim\n"
     ],
     "thumbnailUrl": "https://i.imgur.com/OvqCRMZ.png",
     "reactions": {
@@ -53,6 +54,10 @@
         "942059499823443979": {
             "type": "role",
             "value": "942058262365372476"
+        },
+        "&locomotive": {
+            "type": "role",
+            "value": "946386319746154567"
         }
     }
 }
